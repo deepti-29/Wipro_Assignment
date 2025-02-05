@@ -1,4 +1,4 @@
-Wipro Day 2 - Assignment 1
+Wipro Day 2 - Assignment
 =============================================
 
 1. Implementation of Null Pointer Exception & Array Index Out of Bound Exception using Try-Catch-Finally Blocks
