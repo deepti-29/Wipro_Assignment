@@ -1,0 +1,118 @@
+Wipro Day 5 - Assignment 4
+=============================================
+
+1-Given a list of employees, each with a name, age, and salary, write a Java program using the Streams API to:
+
+- Filter employees who are older than 30.
+- Find the average salary of employees who meet the age condition.
+- Collect the names of these employees into a List.
+- Print the list of employee names and the average salary.
+
+Hint: Use filter(), map(), collect(), and average() methods from Streams
+
+------------------------------------------------------
+
+Java Solution:
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+class Employee {
+    String name;
+    int age;
+    double salary;
+
+    public Employee(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class EmployeeFilter {
+    public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+            new Employee("Alice", 28, 50000),
+            new Employee("Bob", 35, 60000),
+            new Employee("Charlie", 40, 70000),
+            new Employee("David", 25, 55000),
+            new Employee("Eve", 32, 65000)
+        );
+
+        // Filter employees older than 30 and collect names
+        List<String> employeeNames = employees.stream()
+                .filter(emp -> emp.getAge() > 30)
+                .map(Employee::getName)
+                .collect(Collectors.toList());
+
+        // Calculate the average salary of employees older than 30
+        double avgSalary = employees.stream()
+                .filter(emp -> emp.getAge() > 30)
+                .mapToDouble(Employee::getSalary)
+                .average()
+                .orElse(0.0);
+
+        // Print the results
+        System.out.println("Employees older than 30: " + employeeNames);
+        System.out.println("Average Salary: " + avgSalary);
+    }
+}
+```
+
+------------------------------------------------------
+
+2-Write a Java program that demonstrates the use of lambda expressions to sort a list of strings in reverse alphabetical order. 
+Then, implement a functional interface StringProcessor with a method process(String str) that takes a string and returns its uppercase version. 
+Use this functional interface in conjunction with a lambda expression to process a list of strings and print their uppercase forms.
+
+Hint: Use List.sort(), lambda expressions, and String::toUpperCase
+
+------------------------------------------------------
+
+Java Solution:
+
+```java
+import java.util.*;
+
+@FunctionalInterface
+interface StringProcessor {
+    String process(String str);
+}
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList("apple", "banana", "cherry", "date", "elderberry");
+
+        // Sorting in reverse alphabetical order using lambda
+        words.sort((s1, s2) -> s2.compareTo(s1));
+
+        System.out.println("Sorted list in reverse order: " + words);
+
+        // Using lambda to convert strings to uppercase
+        StringProcessor processor = str -> str.toUpperCase();
+
+        List<String> upperCaseWords = new ArrayList<>();
+        for (String word : words) {
+            upperCaseWords.add(processor.process(word));
+        }
+
+        System.out.println("Uppercase words: " + upperCaseWords);
+    }
+}
+```
+
+------------------------------------------------------
+
