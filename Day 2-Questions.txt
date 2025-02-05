@@ -1,0 +1,82 @@
+Wipro Day 2 - Assignment 1
+=============================================
+
+1. Implementation of Null Pointer Exception & Array Index Out of Bound Exception using Try-Catch-Finally Blocks
+-------------------------------------------------------------------------------------
+
+Java Program:
+
+```java
+public class ExceptionHandlingExample {
+    public static void main(String[] args) {
+        try {
+            // Null Pointer Exception Example
+            String str = null;
+            System.out.println(str.length()); // This will throw NullPointerException
+
+            // Array Index Out of Bound Exception Example
+            int[] numbers = {1, 2, 3};
+            System.out.println(numbers[5]); // This will throw ArrayIndexOutOfBoundsException
+            
+        } catch (NullPointerException e) {
+            System.out.println("Caught a NullPointerException: " + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Caught an ArrayIndexOutOfBoundsException: " + e.getMessage());
+        } finally {
+            System.out.println("This block is always executed, handling cleanup if needed.");
+        }
+    }
+}
+```
+
+Explanation:
+- A `NullPointerException` occurs when an operation is performed on a `null` object.
+- An `ArrayIndexOutOfBoundsException` occurs when trying to access an invalid index of an array.
+- The `try` block contains code that may throw exceptions.
+- The `catch` blocks handle specific exceptions.
+- The `finally` block always executes, ensuring any necessary cleanup.
+
+-------------------------------------------------------------------------------------
+
+2. Creating a Custom Exception in Java
+-------------------------------------------------------------------------------------
+
+Java Program:
+
+```java
+// Custom Exception Class
+class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+
+public class CustomExceptionExample {
+    public static void main(String[] args) {
+        try {
+            validateAge(15); // Calling the method with invalid age
+        } catch (CustomException e) {
+            System.out.println("Caught a CustomException: " + e.getMessage());
+        }
+    }
+
+    // Method to validate age and throw custom exception
+    static void validateAge(int age) throws CustomException {
+        if (age < 18) {
+            throw new CustomException("Age must be 18 or above!");
+        } else {
+            System.out.println("Valid age, access granted.");
+        }
+    }
+}
+```
+
+Explanation:
+- A `CustomException` class extends `Exception` and provides a constructor to pass error messages.
+- The `validateAge` method checks if the age is below 18 and throws a `CustomException` if true.
+- The `main` method calls `validateAge(15)`, which triggers the exception.
+- The `catch` block handles the custom exception and prints an appropriate message.
+
+-------------------------------------------------------------------------------------
+
+End of Assignment.
