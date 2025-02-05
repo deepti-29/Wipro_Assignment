@@ -1,0 +1,124 @@
+Wipro Day 4 - Assignment 3
+=============================================
+
+1. Working with ArrayList in Java
+------------------------------------------------------
+
+Java Program:
+
+```java
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        // Creating an ArrayList of integers
+        ArrayList<Integer> numbers = new ArrayList<>();
+
+        // Adding five integer elements
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        numbers.add(50);
+
+        // Removing the third element (index 2)
+        numbers.remove(2);
+
+        // Updating the second element (index 1) with a new value
+        numbers.set(1, 25);
+
+        // Displaying all elements using a loop
+        System.out.println("ArrayList elements:");
+        for (int num : numbers) {
+            System.out.println(num);
+        }
+    }
+}
+```
+
+------------------------------------------------------
+
+2. Working with HashSet in Java
+------------------------------------------------------
+
+Java Program:
+
+```java
+import java.util.HashSet;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+        // Creating a HashSet of strings
+        HashSet<String> cities = new HashSet<>();
+
+        // Adding five city names, including a duplicate
+        cities.add("New York");
+        cities.add("London");
+        cities.add("Tokyo");
+        cities.add("Sydney");
+        cities.add("London"); // Duplicate entry
+
+        // Displaying the elements (duplicates will be removed automatically)
+        System.out.println("Cities in HashSet: " + cities);
+
+        // Checking if a particular city exists
+        String cityToCheck = "Tokyo";
+        if (cities.contains(cityToCheck)) {
+            System.out.println(cityToCheck + " is in the set.");
+        } else {
+            System.out.println(cityToCheck + " is not in the set.");
+        }
+
+        // Removing a city
+        cities.remove("Sydney");
+
+        // Displaying the updated set
+        System.out.println("Updated HashSet: " + cities);
+    }
+}
+```
+
+------------------------------------------------------
+
+3. Working with HashMap in Java
+------------------------------------------------------
+
+Java Program:
+
+```java
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        // Creating a HashMap to store student roll numbers and names
+        HashMap<Integer, String> students = new HashMap<>();
+
+        // Inserting five student records
+        students.put(101, "Alice");
+        students.put(102, "Bob");
+        students.put(103, "Charlie");
+        students.put(104, "David");
+        students.put(105, "Eve");
+
+        // Retrieving and displaying the name of a student using roll number
+        int rollNumber = 103;
+        if (students.containsKey(rollNumber)) {
+            System.out.println("Student with Roll Number " + rollNumber + ": " + students.get(rollNumber));
+        } else {
+            System.out.println("Student not found.");
+        }
+
+        // Removing a student entry using roll number
+        students.remove(102);
+
+        // Displaying all student records
+        System.out.println("Updated Student Records:");
+        for (int key : students.keySet()) {
+            System.out.println("Roll Number: " + key + ", Name: " + students.get(key));
+        }
+    }
+}
+```
+
+------------------------------------------------------
+
