@@ -1,0 +1,283 @@
+Wipro Day 3 - Assignment 2
+=============================================
+
+1. Library System - Class Hierarchy with Inheritance
+------------------------------------------------------
+
+Java Program:
+
+```java
+// Base class
+class Item {
+    String title;
+    String author;
+    int publicationYear;
+
+    public Item(String title, String author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
+
+    public void displayDetails() {
+        System.out.println("Title: " + title + ", Author: " + author + ", Year: " + publicationYear);
+    }
+}
+
+// Derived class: Book
+class Book extends Item {
+    String genre;
+
+    public Book(String title, String author, int publicationYear, String genre) {
+        super(title, author, publicationYear);
+        this.genre = genre;
+    }
+
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("Genre: " + genre);
+    }
+}
+
+// Derived class: Magazine
+class Magazine extends Item {
+    int issueNumber;
+
+    public Magazine(String title, String author, int publicationYear, int issueNumber) {
+        super(title, author, publicationYear);
+        this.issueNumber = issueNumber;
+    }
+
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("Issue Number: " + issueNumber);
+    }
+}
+
+public class LibrarySystem {
+    public static void main(String[] args) {
+        Book book = new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925, "Fiction");
+        Magazine magazine = new Magazine("National Geographic", "Various", 2023, 5);
+
+        book.displayDetails();
+        magazine.displayDetails();
+    }
+}
+```
+
+------------------------------------------------------
+
+2. Employee Management System - Abstraction
+------------------------------------------------------
+
+Java Program:
+
+```java
+// Abstract Class
+abstract class Employee {
+    String name;
+    int id;
+
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    abstract void calculateSalary();
+    abstract void displayDetails();
+}
+
+// Derived class: FullTimeEmployee
+class FullTimeEmployee extends Employee {
+    double monthlySalary;
+
+    public FullTimeEmployee(String name, int id, double monthlySalary) {
+        super(name, id);
+        this.monthlySalary = monthlySalary;
+    }
+
+    @Override
+    void calculateSalary() {
+        System.out.println("Full-Time Employee Salary: $" + monthlySalary);
+    }
+
+    @Override
+    void displayDetails() {
+        System.out.println("Full-Time Employee: " + name + ", ID: " + id);
+    }
+}
+
+// Derived class: PartTimeEmployee
+class PartTimeEmployee extends Employee {
+    double hourlyRate;
+    int hoursWorked;
+
+    public PartTimeEmployee(String name, int id, double hourlyRate, int hoursWorked) {
+        super(name, id);
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+
+    @Override
+    void calculateSalary() {
+        System.out.println("Part-Time Employee Salary: $" + (hourlyRate * hoursWorked));
+    }
+
+    @Override
+    void displayDetails() {
+        System.out.println("Part-Time Employee: " + name + ", ID: " + id);
+    }
+}
+
+public class EmployeeManagement {
+    public static void main(String[] args) {
+        Employee[] employees = {
+            new FullTimeEmployee("Alice", 101, 5000),
+            new PartTimeEmployee("Bob", 102, 20, 80)
+        };
+
+        for (Employee emp : employees) {
+            emp.displayDetails();
+            emp.calculateSalary();
+        }
+    }
+}
+```
+
+------------------------------------------------------
+
+3. Polymorphism - Vehicle System
+------------------------------------------------------
+
+Java Program:
+
+```java
+// Base class
+class Vehicle {
+    void startEngine() {
+        System.out.println("Starting a generic vehicle...");
+    }
+}
+
+// Derived class: Car
+class Car extends Vehicle {
+    @Override
+    void startEngine() {
+        System.out.println("Starting the car engine with a key turn.");
+    }
+}
+
+// Derived class: Motorcycle
+class Motorcycle extends Vehicle {
+    @Override
+    void startEngine() {
+        System.out.println("Starting the motorcycle engine with a button press.");
+    }
+}
+
+// Method demonstrating polymorphism
+public class VehicleTest {
+    public static void vehicleTestDrive(Vehicle vehicle) {
+        vehicle.startEngine();
+    }
+
+    public static void main(String[] args) {
+        Vehicle car = new Car();
+        Vehicle motorcycle = new Motorcycle();
+
+        vehicleTestDrive(car);
+        vehicleTestDrive(motorcycle);
+    }
+}
+```
+
+------------------------------------------------------
+
+4. Shape Drawing Application - Abstraction & Polymorphism
+------------------------------------------------------
+
+Java Program:
+
+```java
+// Abstract Class
+abstract class Shape {
+    abstract void draw();
+}
+
+// Derived class: Circle
+class Circle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("Drawing a Circle.");
+    }
+}
+
+// Derived class: Rectangle
+class Rectangle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("Drawing a Rectangle.");
+    }
+}
+
+public class ShapeDrawingApp {
+    public static void main(String[] args) {
+        Shape[] shapes = { new Circle(), new Rectangle() };
+
+        for (Shape shape : shapes) {
+            shape.draw();
+        }
+    }
+}
+```
+
+------------------------------------------------------
+
+5. Online Payment System - Polymorphism
+------------------------------------------------------
+
+Java Program:
+
+```java
+// Abstract Class
+abstract class PaymentMethod {
+    abstract void processPayment(double amount);
+}
+
+// Derived class: CreditCard
+class CreditCard extends PaymentMethod {
+    @Override
+    void processPayment(double amount) {
+        System.out.println("Processing Credit Card payment of $" + amount + " with a 2% fee.");
+    }
+}
+
+// Derived class: PayPal
+class PayPal extends PaymentMethod {
+    @Override
+    void processPayment(double amount) {
+        System.out.println("Processing PayPal payment of $" + amount + " with no additional fee.");
+    }
+}
+
+// Method demonstrating polymorphism
+public class PaymentSystem {
+    public static void processTransaction(PaymentMethod paymentMethod, double amount) {
+        paymentMethod.processPayment(amount);
+    }
+
+    public static void main(String[] args) {
+        PaymentMethod creditCard = new CreditCard();
+        PaymentMethod paypal = new PayPal();
+
+        processTransaction(creditCard, 100);
+        processTransaction(paypal, 100);
+    }
+}
+```
+
+------------------------------------------------------
+
+End of Assignment.
