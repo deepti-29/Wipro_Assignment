@@ -1,0 +1,100 @@
+Wipro Day 6 - Assignment (Servlets)
+=============================================
+
+1. Create a Simple Java Servlet to Handle Form Data:
+------------------------------------------------------
+Write a Java servlet that takes input from an HTML form (e.g., name, email, and message) 
+and displays the entered information on a new webpage. The servlet should process the POST request 
+and display the input values in a response page with a greeting message.
+
+------------------------------------------------------
+
+Java Solution:
+
+**HTML Form (index.html):**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Input</title>
+</head>
+<body>
+    <form action="FormHandlerServlet" method="post">
+        Name: <input type="text" name="name"><br>
+        Email: <input type="email" name="email"><br>
+        Message: <textarea name="message"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+```
+
+**Java Servlet (FormHandlerServlet.java):**
+```java
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/FormHandlerServlet")
+public class FormHandlerServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String message = request.getParameter("message");
+        
+        out.println("<html><body>");
+        out.println("<h2>Hello, " + name + "!</h2>");
+        out.println("<p>Email: " + email + "</p>");
+        out.println("<p>Message: " + message + "</p>");
+        out.println("</body></html>");
+    }
+}
+```
+
+------------------------------------------------------
+
+2. Write a Servlet to Display Current Date and Time:
+------------------------------------------------------
+Create a Java servlet that, when accessed through a browser, displays the current date and time in a formatted string 
+(e.g., "Date: yyyy-MM-dd, Time: HH:mm:ss"). The servlet should generate the current date and time using java.util.Date 
+or java.time.LocalDateTime and show it to the user in the response page.
+
+------------------------------------------------------
+
+Java Solution:
+
+**Java Servlet (DateTimeServlet.java):**
+```java
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/DateTimeServlet")
+public class DateTimeServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        
+        out.println("<html><body>");
+        out.println("<h2>Current Date and Time:</h2>");
+        out.println("<p>" + now.format(formatter) + "</p>");
+        out.println("</body></html>");
+    }
+}
+```
